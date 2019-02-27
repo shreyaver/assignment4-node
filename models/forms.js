@@ -43,5 +43,13 @@ module.exports = (sequelize, DataTypes) => {
       return { message: errorObj.message };
     }
   };
+  forms.getNameAndCreatedDate = async () => {
+    try {
+      const responses = await forms.findAll({ attributes: ['name', 'createdAt'] });
+      return responses;
+    } catch (errorObj) {
+      return errorObj.message;
+    }
+  };
   return forms;
 };

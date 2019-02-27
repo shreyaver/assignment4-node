@@ -60,4 +60,24 @@ describe('forms.generate()', () => {
     expect(await Model.forms.generate(formObj)).toEqual({ message: `Validation error: ${errorMessages.FIELDS_NO_NUMBER_OR_ALPHABET_ERROR_MESSAGE}` });
   });
 });
+describe('forms.getNameAndCreatedDate()', () => {
+  it('should get "name" and "createdAt" for all forms in database', async () => {
+    const formObj1 = {
+      name: 'Personal Details',
+      fields: ['First Name', 'Last Name', 'Address', 'Country'],
+    };
+    const formObj2 = {
+      name: 'Code Academy Feedback 2019',
+      fields: ['What did you like?', 'What could have been improved? '],
+    };
+    await Model.forms.generate(formObj1);
+    await Model.forms.generate(formObj2);
+    const nameAndCreatedDateArr = await Model.forms.getNameAndCreatedDate();
+    expect(nameAndCreatedDateArr.map(formObj => formObj.name))
+      .toEqual([formObj1.name, formObj2.name]);
+    expect(nameAndCreatedDateArr.map(formObj => formObj.createdAt)
+      .every(createdAt => (createdAt !== undefined)))
+      .toEqual(true);
+  });
+});
 afterAll(() => Model.forms.sequelize.close());
