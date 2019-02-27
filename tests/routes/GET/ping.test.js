@@ -1,4 +1,4 @@
-const { server } = require('../../server');
+const { server } = require('../../../server');
 
 describe('the "ping" route at GET call', () => {
   const options = {
