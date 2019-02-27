@@ -1,0 +1,31 @@
+{
+  "name": "assignment4-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "migrationDown": "NODE_ENV=test ./node_modules/.bin/sequelize db:migrate:undo:all",
+    "migrationUp": "NODE_ENV=test ./node_modules/.bin/sequelize db:migrate",
+    "testModel": "npm run migrationDown && npm run migrationUp && jest tests/models/forms.test.js",
+    "startServer": "NODE_ENV=test npm run migrationDown && NODE_ENV=test npm run migrationUp && NODE_ENV=test node server.js"
+  },
+  "author": "Shreya Verma",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "axios-mock-adapter": "^1.16.0",
+    "hapi": "^17.8.0",
+    "joi": "^14.3.1",
+    "pg": "^7.8.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.42.0",
+    "sequelize-cli": "^5.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.14.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "jest": "^24.0.0"
+  }
+}
